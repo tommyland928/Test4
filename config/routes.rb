@@ -20,6 +20,6 @@ Rails.application.routes.draw do
 
   post 'chips/store' => 'chips#store'
   post 'chips/save' => 'chips#save'
-  post 'members' => 'chips#create'
+  post 'members' => 'chips#createm'
 
 end

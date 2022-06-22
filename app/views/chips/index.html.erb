@@ -105,7 +105,7 @@
     
 
         <h1>送信フォーム</h1>
-
+        <div class="parent">
 
         <div class="sending">
             <%= form_tag({ :controller => 'chips', :action => 'store' },{ :method => :post}) do %>
@@ -151,6 +151,7 @@
                 <%= submit_tag "送信", class: "submit" %>
                 </div>
             <% end %>
+        </div>
         </div>
     </body>
 </html>

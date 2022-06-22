@@ -3,6 +3,7 @@ h1{
     font-size:50px;
     margin: 80px auto 0px auto;
 }
+
 .sending{
     display: flex;
     flex-flow: column;
@@ -88,3 +89,6 @@ h1{
     margin: 0px auto 30px auto;
     font-size: xx-large;
 }
+
+
+

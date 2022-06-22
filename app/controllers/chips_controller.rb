@@ -1,6 +1,6 @@
 class ChipsController < ApplicationController
-
     def index
+        logger.debug("二回目も通ってます")
         @member = Member.all
     end
 
@@ -9,10 +9,10 @@ class ChipsController < ApplicationController
             tmp = 10 * params[:green].to_i + 30 * params[:blue].to_i + 50 * params[:red].to_i + 100 * params[:black].to_i
             score = (tmp.to_f * (params[:bet].to_f / params[:first].to_f)).to_i - params[:bet].to_i
             send = params[:bet].to_i + score
-            member = Member.find_by(name: params[:name], group: params[:group])
+            theMember = Member.find_by(name: params[:name], group: params[:group])
             if Person.find_by(name: params[:name], group: params[:group]) == nil then
                 person = Person.new({ "name" => params[:name], "group" => params[:group], "score" => score, "send" => send})
-                person.update(id: member.id)
+                person.update(id: theMember.id)
                 if person.save
                     redirect_to :action => "rank"
                 else
@@ -47,14 +47,14 @@ class ChipsController < ApplicationController
 
             person = Person.all
             person.each do |t|
-                member = Member.find_by(name: t.name.to_s, group: t.group.to_s)
-                if member != nil then
+                tmpMember = Member.find_by(name: t.name.to_s, group: t.group.to_s)
+                if tmpMember != nil then
                     logger.debug("ここまで来てるよ2")
 
-                    tmp = member.score + t.score
+                    tmp = tmpMember.score + t.score
                     logger.debug(tmp)
-                    member.update(score: tmp)
-                    if member.save
+                    tmpMember.update(score: tmp)
+                    if tmpMember.save
                         redirect_to :action => "general"
                     end
                 end
@@ -71,10 +71,10 @@ class ChipsController < ApplicationController
         @member = Member.new
     end
 
-    def create
-        member = Member.new(params.require(:member).permit(:name,:group))
-        member.update(score: 0)
-        if member.save
+    def createm
+        cmember = Member.new(params.require(:member).permit(:name,:group))
+        cmember.update(score: 0)
+        if cmember.save
             redirect_to :action => "add"
         else
         end
